@@ -5,9 +5,10 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from '../_providers/authentication.service';
+import { Router } from '@angular/router';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private _service: AuthenticationService) {}
+    constructor(private router: Router, private _service: AuthenticationService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(
@@ -26,7 +27,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             }else if (err.status === 401) {
                 // auto logout if 401 response returned from api
                 this._service.logout();
-                location.reload(true);
+                this.router.navigate(['/login']);
             } else {
                 console.log(err.error);
                 const error = err.error.message ? err.error.message: err.error.error_description;

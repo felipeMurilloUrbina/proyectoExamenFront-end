@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
@@ -9,14 +10,17 @@ import { StructModule } from './admin/struct/struct.module';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { HashLocationStrategy } from '@angular/common';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,

@@ -7,11 +7,10 @@ const routes: Routes = [
       path: '', component: StructComponent,
       children: [
         { path:'', redirectTo: 'perfil', pathMatch: 'full' },
-        { path: 'perfil', loadChildren: '../profile/profile.module#ProfileModule' }
-        // { path: 'list-usuarios', loadChildren: '../department/department.module#DepartmentModule' },
-        // { path: 'usuarios', loadChildren: '../user/user.module#UserModule' },
-        // { path: 'empleados', loadChildren: '../employee/employee.module#EmployeeModule'},
-        // { path: 'noticias', loadChildren: '../new/new.module#NewModule'}
+        { path: 'perfil', loadChildren: '../profile/profile.module#ProfileModule' },
+        { path: 'usuarios', loadChildren: '../list-user/list-user.module#ListUserModule' },
+        { path: 'roles', loadChildren: '../role/role.module#RoleModule' },
+        { path: 'permisos', loadChildren: '../permission/permission.module#PermissionModule'}
     ]
     }
 ];

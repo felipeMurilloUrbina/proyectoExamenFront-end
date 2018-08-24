@@ -1,31 +1,30 @@
 <div class="col-md-12">
-
     <!-- Profile Image -->
     <div class="card card-primary card-outline">
       <div class="card-body box-profile">
         <div class="text-center">
-          <img class="profile-user-img img-fluid img-circle"
-               src="../../dist/img/user4-128x128.jpg"
-               alt="User profile picture">
+          <img class="profile-user-img img-fluid img-circle avatar"
+               src="{{this.user.avatar}}"
+               alt="User profile" (click)="changeAvatar()">
         </div>
 
-        <h3 class="profile-username text-center">Nina Mcintire</h3>
+        <h3 class="profile-username text-center">{{user?.fullName}}</h3>
 
-        <p class="text-muted text-center">Software Engineer</p>
+        <p class="text-muted text-center">{{user?.userName}}</p>
 
         <ul class="list-group list-group-unbordered mb-3">
           <li class="list-group-item">
-            <b>Followers</b> <a class="float-right">1,322</a>
+            <b>Nombre:</b> <a class="float-right"><input type="text" class="form-control" name="name" [(ngModel)]="user.name"/></a>
           </li>
           <li class="list-group-item">
-            <b>Following</b> <a class="float-right">543</a>
+            <b>Apellido:</b> <a class="float-right"><input type="text" class="form-control" name="lastName" [(ngModel)]="user.lastName"/></a>
           </li>
           <li class="list-group-item">
-            <b>Friends</b> <a class="float-right">13,287</a>
+            <b>Telefono:</b> <a class="float-right"><input type="text" class="form-control" name="phoneNumber" [(ngModel)]="user.phoneNumber"/></a>
           </li>
         </ul>
 
-        <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+        <a href="#" class="btn btn-primary btn-block" (click)="updateProfile()"><b>Actualizar Perfil</b></a>
       </div>
       <!-- /.card-body -->
     </div>
@@ -34,55 +33,68 @@
     <!-- About Me Box -->
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">About Me</h3>
+        <h3 class="card-title">Permisos del Rol</h3>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
-        <strong><i class="fa fa-book mr-1"></i> Education</strong>
-
-        <p class="text-muted">
-          B.S. in Computer Science from the University of Tennessee at Knoxville
-        </p>
-
-        <hr>
-
-        <strong><i class="fa fa-map-marker mr-1"></i> Location</strong>
-
-        <p class="text-muted">Malibu, California</p>
-
-        <hr>
-
-        <strong><i class="fa fa-pencil mr-1"></i> Skills</strong>
-
-        <p class="text-muted">
-          <span class="tag tag-danger">UI Design</span>
-          <span class="tag tag-success">Coding</span>
-          <span class="tag tag-info">Javascript</span>
-          <span class="tag tag-warning">PHP</span>
-          <span class="tag tag-primary">Node.js</span>
-        </p>
-
-        <hr>
-
-        <strong><i class="fa fa-file-text-o mr-1"></i> Notes</strong>
-
-        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+          <table class="table table-striped table-valign-middle">
+              <thead>
+              <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let permission of user?.rol?.permissions">
+                <td>
+                  {{permission.name}}
+                </td>
+                <td>
+                  {{permission.description}}
+                </td>
+              </tr>
+              </tbody>
+            </table>
       </div>
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
-    <input type="file" (change)="fileChangeEvent($event)" />
+   
 
-<image-cropper
-    [imageChangedEvent]="imageChangedEvent"
-    [maintainAspectRatio]="true"
-    [aspectRatio]="4 / 3"
-    [resizeToWidth]="256"
-    format="png"
-    (imageCroppedBase64)="imageCropped($event)"
-    (imageLoaded)="imageLoaded()"
-    (loadImageFailed)="loadImageFailed()"
-></image-cropper>
 
-<img [src]="croppedImage" />
-  </div>
+
+  <div class="modal fade" id="avatarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cambiar Avatar</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="col-12">
+                <div class="row">
+                  <input type="file" (change)="fileChangeEvent($event)" />
+                  <image-cropper
+                      [imageChangedEvent]="imageChangedEvent"
+                      [maintainAspectRatio]="true"
+                      [aspectRatio]="4 / 3"
+                      [resizeToWidth]="256"
+                      format="png"
+                      (imageCroppedBase64)="imageCropped($event)"
+                      (imageLoaded)="imageLoaded()"
+                      (loadImageFailed)="loadImageFailed()"
+                  ></image-cropper>
+                  <!-- <img [src]="croppedImage" /> -->
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" #btnClose class="btn btn-secondary" data-dismiss="modal">Salir</button>
+            <button type="submit" class="btn btn-primary" (click)="uploadAvatar()">Guardar Avatar</button>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -6,8 +6,8 @@ import { ToasterService } from 'angular2-toaster';
 declare var $: any;
 @Injectable()
 export class BaseService {
-  private actionUrl: string;
-  httpOptions: any;
+  public actionUrl: string;
+  public httpOptions: any;
   constructor(public http: HttpClient, public endPoint: string, private toasterService: ToasterService) {
     this.actionUrl = environment.urlBase + endPoint;
     this.httpOptions = {
@@ -24,9 +24,9 @@ export class BaseService {
   }
   
   public getAll<T>(page, qty) {
-    var uri = this.actionUrl +'?page=' + page + '&qty=' + qty;
-    this.show();
-    return this.http.get<T>(uri, this.httpOptions);
+    // var uri = this.actionUrl +'?page=' + page + '&qty=' + qty;
+    // this.show();
+    return this.http.get<T>(this.actionUrl, this.httpOptions);
   }
 
   public getSingle <T> (id: number) {
@@ -42,12 +42,14 @@ export class BaseService {
   }
 
   add <T> (itemName: T, endPoint) {
-    return this.http.post <T> (this.actionUrl, itemName, this.httpOptions);
+    const url = endPoint !== '' ? this.actionUrl + '/'+ endPoint : this.actionUrl; 
+    return this.http.post <T> (url, itemName, this.httpOptions);
   }
 
   update <T> (itemToUpdate: any, endPoint) {
+    const url = endPoint !== '' ? this.actionUrl + '/'+ endPoint : this.actionUrl; 
     return this.http
-      .put<T>(this.actionUrl, itemToUpdate, this.httpOptions);
+      .put<T>(url, itemToUpdate, this.httpOptions);
   }
 
   public delete <T> (id: number) {

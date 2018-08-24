@@ -1,0 +1,26 @@
+<div class="div-login">
+  <div class="header">Iniciar Session</div>
+  <div class="bd-example">
+    <div class="col-12">
+      <div class="form-group row">
+        <label for="username">Usuario:</label>
+        <input class="form-control" id="username" #username [value]= "user.userName" (change)="usuario.username = username.value">
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group row">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" #password [value]= "user.password" (change)="usuario.password = password.value">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Entrar</button>
+  </div>
+</div>
+<!-- <div class="outer">
+  <div class="middle">
+    <div class="inner">
+      <h1>The Content</h1>
+      <p>Once upon a midnight dreary...</p>
+    </div>
+  </div>
+</div> -->

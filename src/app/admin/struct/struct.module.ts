@@ -6,6 +6,7 @@ import { ContentComponent } from './content/content.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { StructRoutingModule } from './struct-routing.module';
+import { UserService } from '../../_providers/user.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { StructRoutingModule } from './struct-routing.module';
     CommonModule
   ],
   declarations: [StructComponent, MenuComponent, ContentComponent, FooterComponent, HeaderComponent],
-  exports: [StructComponent]
+  exports: [StructComponent],
+  providers: [UserService]
 })
 export class StructModule { }

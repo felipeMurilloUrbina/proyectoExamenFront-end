@@ -3,6 +3,7 @@
     height: 400px;
     max-width:600px;
     max-width:600px;
+    margin: auto;
     background-color: white;
     border-radius: 14px;
     box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;

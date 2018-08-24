@@ -1,0 +1,102 @@
+<div class="card">
+  <div class="card-header no-border">
+    <h3 class="card-title">Nuevo Usuario</h3>
+  </div>
+  <div class="card-body p-0">
+    <form #newForm="ngForm" ngNativeValidate>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <div class="form-group">
+                <label>Nombre:</label>
+                <input type="text" class="form-control" #nameInput id="name" [value]="user.name" (change)="user.name = nameInput.value" placeholder="Nombre..." required>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <div class="form-group">
+                <label>Apellidos:</label>
+                <input type="text" class="form-control" #lastNameInput id="lastName" [value]="user.lastName" (change)="user.lastName = lastNameInput.value" placeholder="Apellido Paterno..." required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <div class="form-group">
+                <label>Email:</label>
+                <input type="email" class="form-control" #emailInput id="email" [value]="user.email" (change)="user.email = emailInput.value" placeholder="Email..." required>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <div class="form-group">
+                <label>Telefono:</label>
+                <input type="text" class="form-control" #phoneNumberInput id="phoneNumber" [value]="user.phoneNumber" (change)="user.phoneNumber = phoneNumberInput.value" placeholder="Numero de Telefono..." required>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="rolId">Rol:</label>
+              <select id="rolId" class="form-control select2" name="rolId" [(ngModel)]="user.roleId" (change)="onChange()" style="width: 100%;">
+                <option value ="" selected="selected">[*Seleccione la Rol]</option>
+                <option value="{{rol.id}}" *ngFor="let rol of roles">{{rol.name}}</option>
+              </select>
+            </div>
+        </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal fade" id="rolModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo Rol</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #newRoleForm="ngForm" (ngSubmit)="saveRol()">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label>Nombre:</label>
+                      <input type="text" class="form-control" #nameRolInput id="name" [value]="rol.name" (change)="rol.name = nameRolInput.value" placeholder="Nombre..." required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label>Descripcion:</label>
+                      <input type="text" class="form-control" #descriptionRolInput id="description" [value]="rol.description" (change)="rol.description = descriptionRolInput.value" placeholder="Nombre...">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Seleccione los permisos:</label>
+                    <select multiple class="form-control" name="permissions" [(ngModel)]="rol.permissions" required>
+                      <option value="{{permission}}" *ngFor="let permission of permissions">{{permission.code +'--'+permission.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" (click)="saveRol()">Guardar Rol</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -3,14 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { BaseService } from './base.service';
 import { ToasterService } from 'angular2-toaster';
 @Injectable()
-export class UserService extends BaseService {
+export class RolService extends BaseService {
   constructor(public http: HttpClient, toasterService: ToasterService) {
-    super(http, 'usuarios', toasterService);
+    super(http, 'roles', toasterService);
   }
-
-  getProfile(id: string) {
-    const url = this.actionUrl + '/' + id;
-    return this.http.get(url, this.httpOptions);
-  }
-
 }
