@@ -14,7 +14,7 @@ export class AuthenticationService {
     }
 
     login(user: User) {
-        let body = 'username=' + user.userName + '&password=' + user.password + '&grant_type=password&client_id=' + environment.AppId;
+        let body = 'username=' + user.userName + '&password=' + user.password + '&grant_type=password&client_id=' + environment.appId;
         return this.http.post<any>(environment.urlBase + 'token',
                 body,
                 { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./permission.component.css']
 })
 export class PermissionComponent implements OnInit {
-
+  permissions: any[];
   constructor() { }
 
   ngOnInit() {
