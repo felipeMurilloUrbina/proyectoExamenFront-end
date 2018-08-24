@@ -39,7 +39,7 @@ export class AuthenticationService {
 
     show() {
         $(document).ready(() => {
-          $('.login100-form').waitMe({
+          $('body').waitMe({
             effect: 'bounce',
             text: 'Cargando...',
             bg: 'rgba(116, 116, 122, 0.58)',
@@ -56,8 +56,8 @@ export class AuthenticationService {
 
     hide() {
         $(document).ready(() => {
-          $('.login100-form').waitMe('hide');
-          $('.content-wrapper').waitMe('hide');
+          $('body').waitMe('hide');
+          // $('').waitMe('hide');
         });
     }
 }

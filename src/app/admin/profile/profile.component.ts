@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   croppedImage: any = '';
   user: any;
   helper: JwtHelperService;
-  @ViewChild('btnClose') btnClose : ElementRef; 
+  @ViewChild('btnClose') btnClose : ElementRef;
   constructor(public service: UserService) {
     this.helper = new JwtHelperService();
     const token = localStorage.getItem('token');
@@ -35,11 +35,11 @@ export class ProfileComponent implements OnInit {
   getProfile() {
     this.service.getProfile(this.user.nameid).subscribe(data => {
       localStorage.removeItem('profile');
-      localStorage.setItem('profile', JSON.stringify(data['profile']));  
+      localStorage.setItem('profile', JSON.stringify(data['profile']));
     });
   }
 
-  changeAvatar(){
+  changeAvatar() {
     $('#avatarModal').modal({
       show: true,
       keyboard: false
@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
     };
     this.service.save(avatar, 'avatar').subscribe(data => {
       this.service.sendMessage(MessageStatus.ok, 'Ok', data);
-      $(".avatar").attr("src",this.croppedImage);
+      $('.avatar').attr('src',this.croppedImage);
       this.btnClose.nativeElement.click();
       this.getProfile();
     });

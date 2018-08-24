@@ -23,9 +23,14 @@ export class LoginComponent implements OnInit {
     this.service.login(this.user).subscribe(dato => {
       this.service.hide();
       const helper = new JwtHelperService();
-      const token= localStorage.getItem('token');
+      const token = localStorage.getItem('token');
       const decodedToken = helper.decodeToken(token);
-      this.router.navigate(['/admin']);
+      console.log(decodedToken);
+      if (decodedToken.role === 'Master') {
+        this.router.navigate(['/admin/usuarios']);
+      } else {
+        this.router.navigate(['/admin/perfil']);
+      }
     });
   }
 }
